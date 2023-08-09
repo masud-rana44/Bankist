@@ -26,6 +26,14 @@
       .font-poppins {
         font-family: "Poppins", sans-serif;
       }
+
+      @layer base {
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
     </style>
   </head>
   <body class="bg-[#f3f3f3] text-[#444] font-poppins">
@@ -107,34 +115,100 @@
           </div>
         </div>
         <div
-          class="h-screen col-start-1 col-span-full md:col-start-5 md:col-span-3"
+          class="h-screen col-start-1 col-span-full md:col-start-5 md:col-span-3 space-y-5"
         >
+          <!-- transfer money -->
           <div
             class="bg-gradient-to-tl from-[#ffb003] to-[#ffcb03] px-8 py-6 flex flex-col rounded-lg"
           >
             <h3 class="text-[17px] font-semibold text-[#333] mb-4">
               Transfer money
             </h3>
-            <form class="flex items-center gap-4">
-              <div class="flex-1">
+            <form class="flex items-center gap-3">
+              <div class="flex-1 flex flex-col items-center gap-1">
                 <input
                   class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
                   id="acc"
                   type="text"
                 />
-                <label for="acc">Transfer to</label>
+                <label class="text-[13px]" for="acc">Transfer to</label>
               </div>
-              <div class="flex-1">
+              <div class="flex-1 flex flex-col items-center gap-1">
                 <input
                   class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
                   id="amount"
                   type="number"
                 />
-                <label for="amount">Amount</label>
+                <label class="text-[13px]" for="amount">Amount</label>
               </div>
-              <button type="submit">→</button>
+              <button
+                class="bg-white border-none outline-none self-start px-5 py-[2px] rounded-md"
+                type="submit"
+              >
+                →
+              </button>
             </form>
           </div>
+
+          <!-- request loan -->
+          <div
+            class="bg-gradient-to-tl from-[#39b385] to-[#9be15d] px-8 py-6 flex flex-col rounded-lg"
+          >
+            <h3 class="text-[17px] font-semibold text-[#333] mb-4">
+              Request loan
+            </h3>
+            <form class="grid grid-cols-[2.5fr_1fr_2.5fr] gap-3">
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <input
+                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
+                  id="amount"
+                  type="number"
+                />
+                <label class="text-[13px]" for="amount">Amount</label>
+              </div>
+              <button
+                class="bg-white border-none outline-none self-start px-5 py-[2px] rounded-md"
+                type="submit"
+              >
+                →
+              </button>
+            </form>
+          </div>
+
+          <!-- close account -->
+          <div
+            class="bg-gradient-to-tl from-[#e52a5a] to-[#ff585f] px-8 py-6 flex flex-col rounded-lg"
+          >
+            <h3 class="text-[17px] font-semibold text-[#333] mb-4">
+              Close account
+            </h3>
+            <form class="flex items-center gap-3">
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <input
+                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
+                  id="acc"
+                  type="text"
+                />
+                <label class="text-[13px]" for="acc">Confirm user</label>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <input
+                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
+                  id="amount"
+                  type="number"
+                />
+                <label class="text-[13px]" for="amount">Confirm PIN</label>
+              </div>
+              <button
+                class="bg-white border-none outline-none self-start px-5 py-[2px] rounded-md"
+                type="submit"
+              >
+                →
+              </button>
+            </form>
+          </div>
+
+          <!-- --------- -->
         </div>
       </div>
     </main>
