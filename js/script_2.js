@@ -75,6 +75,11 @@ const accounts = [account1, account2, account3];
 const app = document.querySelector('.app');
 const greetings = document.querySelector('.welcome');
 const balance = document.querySelector('.balance__value');
+const movementsContainer = document.querySelector('.movements');
+
+const summaryIn = document.querySelector('.summary__value--in');
+const summaryOut = document.querySelector('.summary__value--out');
+const summaryInterest = document.querySelector('.summary__value--interest');
 
 const inputPin = document.querySelector('.login__input--pin');
 const inputUser = document.querySelector('.login__input--user');
@@ -95,10 +100,6 @@ function calcUserName() {
 }
 calcUserName();
 
-function calcDisplayBalance(movements) {
-  return movements.reduce((sum, mov) => sum + mov, 0);
-}
-
 function formatCurrency(amount, currencyCode = 'USD', locale = 'en-US') {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
@@ -106,7 +107,68 @@ function formatCurrency(amount, currencyCode = 'USD', locale = 'en-US') {
   }).format(amount);
 }
 
-function displayMovements(movements) {}
+function formatDate(date, locale = 'en-US') {
+  return new Intl.DateTimeFormat(locale).format(new Date(date));
+}
+
+function calcDisplayBalance(movements) {
+  return movements.reduce((sum, mov) => sum + mov, 0);
+}
+
+function calcDisplaySummary(account) {
+  let totalIn = 0;
+  let totalOut = 0;
+
+  account.movements.forEach(mov =>
+    mov > 0 ? (totalIn += mov) : (totalOut += Math.abs(mov))
+  );
+  const interest = (totalIn / 100) * account.interestRate;
+
+  summaryIn.textContent = formatCurrency(
+    totalIn,
+    account.currency,
+    account.locale
+  );
+  summaryOut.textContent = formatCurrency(
+    totalOut,
+    account.currency,
+    account.locale
+  );
+  summaryInterest.textContent = formatCurrency(
+    interest,
+    account.currency,
+    account.locale
+  );
+}
+
+function displayMovements(account) {
+  let html = '';
+  const totalMovements = account.movements.length;
+
+  account.movements
+    .slice()
+    .reverse()
+    .forEach((mov, idx) => {
+      const movementType = mov >= 0 ? 'deposit' : 'withdrawal';
+
+      html += `<div class="movements__row">
+          <div class="movements__type movements__type--${movementType}">${
+        totalMovements - idx
+      } ${movementType}</div>
+          <div class="movements__date">${formatDate(
+            account.movementsDates[totalMovements - (idx + 1)],
+            account.locale
+          )}</div>
+          <div class="movements__value">${formatCurrency(
+            mov,
+            account.currency,
+            account.locale
+          )}</div>
+        </div>`;
+    });
+
+  movementsContainer.insertAdjacentHTML('beforeend', html);
+}
 
 /////////////////////
 // Event handlers
@@ -118,7 +180,7 @@ btnLogin.addEventListener('click', e => {
   const user = inputUser.value;
   const pin = Number(inputPin.value);
 
-  if (!user || !pin) return;
+  // if (!user || !pin) return;
 
   // check if the user is authenticated or not
   // accounts.forEach(account => {
@@ -131,6 +193,8 @@ btnLogin.addEventListener('click', e => {
     account.currency,
     account.locale
   );
+  displayMovements(account);
+  calcDisplaySummary(account);
 
   // clear input value
   inputUser.value = inputPin.value = '';
