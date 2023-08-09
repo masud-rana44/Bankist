@@ -83,10 +83,20 @@ const summaryInterest = document.querySelector('.summary__value--interest');
 
 const inputPin = document.querySelector('.login__input--pin');
 const inputUser = document.querySelector('.login__input--user');
+const inputTo = document.querySelector('.form__input--to');
+const inputAmount = document.querySelector('.form__input--amount');
+const inputLoad = document.querySelector('.form__input--loan-amount');
+const inputCloseUser = document.querySelector('.form__input--user');
+const inputClosePin = document.querySelector('.form__input--pin');
 
 const btnLogin = document.querySelector('.login__btn');
+const btnTransfer = document.querySelector('.form__btn--transfer');
+const btnLoan = document.querySelector('.form__btn--loan');
+const btnClose = document.querySelector('.form__btn--close');
 
 //////////////////////
+let currentAccount = account1;
+
 function calcUserName() {
   accounts.forEach(account => {
     const username = account.owner
@@ -170,9 +180,22 @@ function displayMovements(account) {
   movementsContainer.insertAdjacentHTML('beforeend', html);
 }
 
+function updateUI() {
+  if (!currentAccount) return;
+
+  greetings.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+  balance.textContent = formatCurrency(
+    calcDisplayBalance(currentAccount.movements),
+    currentAccount.currency,
+    currentAccount.locale
+  );
+  displayMovements(currentAccount);
+  calcDisplaySummary(currentAccount);
+}
+updateUI();
+
 /////////////////////
 // Event handlers
-const account = account1;
 
 btnLogin.addEventListener('click', e => {
   e.preventDefault();
@@ -180,28 +203,43 @@ btnLogin.addEventListener('click', e => {
   const user = inputUser.value;
   const pin = Number(inputPin.value);
 
-  // if (!user || !pin) return;
+  if (!user || !pin) return;
 
   // check if the user is authenticated or not
-  // accounts.forEach(account => {
-  //   if (account.username === user && account.pin === pin) {
-  // display app interface
-  app.style.opacity = '1';
-  greetings.textContent = `Welcome back, ${account.owner.split(' ')[0]}`;
-  balance.textContent = formatCurrency(
-    calcDisplayBalance(account.movements),
-    account.currency,
-    account.locale
-  );
-  displayMovements(account);
-  calcDisplaySummary(account);
+  accounts.forEach(account => {
+    if (account.username === user && account.pin === pin) {
+      // display app interface
+      app.style.opacity = '1';
+      currentAccount = account;
 
-  // clear input value
-  inputUser.value = inputPin.value = '';
+      // clear input value
+      inputUser.value = inputPin.value = '';
 
-  // clear focus
-  inputUser.blur();
-  inputPin.blur();
-  //   }
-  // });
+      // clear focus
+      inputUser.blur();
+      inputPin.blur();
+    }
+  });
+});
+
+btnTransfer.addEventListener('click', e => {
+  e.preventDefault();
+
+  const transferAccount = inputTo.value;
+  const transferAmount = Number(inputAmount.value);
+
+  const receiverAcc = accounts.forEach(acc => {
+    if (acc.username === transferAccount) return acc;
+  });
+
+  if (!receiverAcc || transferAmount <= 0) return;
+
+  currentAccount.movements.push(-transferAmount);
+  receiverAcc.movements.push(transferAmount);
+
+  const date = new Date().toISOString();
+  currentAccount.movementsDates.push(date);
+  receiverAcc.movementsDates.push(date);
+
+  updateUI();
 });
