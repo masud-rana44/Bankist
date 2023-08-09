@@ -62,7 +62,7 @@
       </div>
     </header>
 
-    <main class="w-full max-w-[1000px] mx-auto my-8">
+    <main class="w-full max-w-[1000px] mx-auto mt-8 mb-6">
       <div class="mx-4 flex items-center justify-between">
         <div>
           <p class="text-xl sm:text-2xl font-medium">Current balance</p>
@@ -76,7 +76,7 @@
       <!-- div 2 -->
       <div class="mx-4 grid grid-cols-7 gap-8 mt-8 rounded-lg overflow-hidden">
         <div
-          class="bg-white h-screen col-start-1 col-span-full md:col-span-4 divide-y divide-[#eee]"
+          class="bg-white min-h-[450px] col-start-1 col-span-full md:col-span-4 divide-y divide-[#eee] overflow-auto"
         >
           <!-- 1 -->
           <div class="flex items-center justify-between px-6 sm:px-12 py-6">
@@ -115,7 +115,7 @@
           </div>
         </div>
         <div
-          class="h-screen col-start-1 col-span-full md:col-start-5 md:col-span-3 space-y-5"
+          class="col-start-1 col-span-full md:col-start-5 md:col-span-3 space-y-5"
         >
           <!-- transfer money -->
           <div
@@ -127,7 +127,7 @@
             <form class="flex items-center gap-3">
               <div class="flex-1 flex flex-col items-center gap-1">
                 <input
-                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
+                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[3px] text-[15px] text-center rounded-md text-[#333]"
                   id="acc"
                   type="text"
                 />
@@ -135,14 +135,14 @@
               </div>
               <div class="flex-1 flex flex-col items-center gap-1">
                 <input
-                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
+                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[3px] text-[15px] text-center rounded-md text-[#333]"
                   id="amount"
                   type="number"
                 />
                 <label class="text-[13px]" for="amount">Amount</label>
               </div>
               <button
-                class="bg-white border-none outline-none self-start px-5 py-[2px] rounded-md"
+                class="bg-white border-none outline-none self-start px-5 py-[3px] text-[15px] rounded-md"
                 type="submit"
               >
                 →
@@ -160,14 +160,14 @@
             <form class="grid grid-cols-[2.5fr_1fr_2.5fr] gap-3">
               <div class="flex-1 flex flex-col items-center gap-1">
                 <input
-                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
+                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[3px] text-[15px] text-center rounded-md text-[#333]"
                   id="amount"
                   type="number"
                 />
                 <label class="text-[13px]" for="amount">Amount</label>
               </div>
               <button
-                class="bg-white border-none outline-none self-start px-5 py-[2px] rounded-md"
+                class="bg-white border-none outline-none self-start px-5 py-[3px] text-[15px] rounded-md"
                 type="submit"
               >
                 →
@@ -185,7 +185,7 @@
             <form class="flex items-center gap-3">
               <div class="flex-1 flex flex-col items-center gap-1">
                 <input
-                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
+                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[3px] text-[15px] text-center rounded-md text-[#333]"
                   id="acc"
                   type="text"
                 />
@@ -193,14 +193,14 @@
               </div>
               <div class="flex-1 flex flex-col items-center gap-1">
                 <input
-                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[2px] text-center rounded-md text-[#333]"
+                  class="w-full bg-[#FFFFFF66] border-none focus:outline-none px-4 py-[3px] text-[15px] text-center rounded-md text-[#333]"
                   id="amount"
                   type="number"
                 />
                 <label class="text-[13px]" for="amount">Confirm PIN</label>
               </div>
               <button
-                class="bg-white border-none outline-none self-start px-5 py-[2px] rounded-md"
+                class="bg-white border-none outline-none self-start px-5 py-[3px] text-[15px] rounded-md"
                 type="submit"
               >
                 →
@@ -212,5 +212,36 @@
         </div>
       </div>
     </main>
+
+    <footer
+      class="w-full max-w-[1000px] mx-auto px-4 py-1 flex flex-wrap items-end justify-between text-xs"
+    >
+      <div
+        class="flex basis-[100%] xl:basis-[55%] items-center justify-between lg:gap-24 xl:gap-8 md:gap-8 gap-4 font-medium"
+      >
+        <div class="flex flex-1 items-end justify-between">
+          <p>
+            IN
+            <span class="text-lg md:text-xl ml-1 text-[#66c873]"
+              >27 035,20 €</span
+            >
+          </p>
+          <p>
+            OUT
+            <span class="text-lg md:text-xl ml-1 text-[#f5465d]"
+              >1082,61 €</span
+            >
+          </p>
+          <p>
+            INTEREST
+            <span class="text-lg md:text-xl ml-1 text-[#66c873]">323,46 €</span>
+          </p>
+        </div>
+        <button class="text-sm font-normal uppercase">↓Sort</button>
+      </div>
+      <p class="basis-[100%] mb-2 xl:mb-0 xl:basis-[45%] flex justify-end">
+        You will be logged out in <span class="font-semibold ml-1"> 05:00</span>
+      </p>
+    </footer>
   </body>
 </html>
