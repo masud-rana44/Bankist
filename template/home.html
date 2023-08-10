@@ -37,14 +37,10 @@
     </style>
   </head>
   <body class="bg-[#f3f3f3] text-[#444] font-poppins">
-    <header
-      class="flex items-center justify-between px-4 sm:px-12 py-4 sm:py-4"
-    >
-      <div class="text-lg font-medium hidden sm:block">Welcome back, Masud</div>
+    <nav class="flex items-center justify-between px-4 sm:px-12 py-4 sm:py-4">
+      <p class="text-lg font-medium hidden sm:block">Welcome back, Masud</p>
 
-      <div>
-        <img class="w-10 sm:w-12" src="./img/logo.png" alt="" />
-      </div>
+      <img class="w-10 sm:w-12" src="./img/logo.png" alt="" />
 
       <div class="flex gap-2 items-center">
         <div class="flex items-center gap-1">
@@ -60,20 +56,21 @@
           logout
         </span>
       </div>
-    </header>
+    </nav>
 
     <main class="w-full max-w-[1000px] mx-auto mt-8 mb-6">
+      <!-- BALANCE -->
       <div class="mx-4 flex items-center justify-between">
         <div>
           <p class="text-xl sm:text-2xl font-medium">Current balance</p>
-          <span class="text-sm sm:text-base text-[#888]"
-            >As of 09/08/2023, 00:34</span
-          >
+          <p class="text-sm sm:text-base text-[#888]">
+            As of <span>09/08/2023, 00:34</span>
+          </p>
         </div>
-        <div class="text-3xl sm:text-5xl">25 952,59 €</div>
+        <p class="text-3xl sm:text-5xl">0000 €</p>
       </div>
 
-      <!-- div 2 -->
+      <!-- MOVEMENTS -->
       <div class="mx-4 grid grid-cols-7 gap-8 mt-8 rounded-lg overflow-hidden">
         <div
           class="bg-white min-h-[450px] col-start-1 col-span-full md:col-span-4 divide-y divide-[#eee] overflow-auto"
@@ -117,7 +114,7 @@
         <div
           class="col-start-1 col-span-full md:col-start-5 md:col-span-3 space-y-5"
         >
-          <!-- transfer money -->
+          <!-- OPERATION: TRANSFERS -->
           <div
             class="bg-gradient-to-tl from-[#ffb003] to-[#ffcb03] px-8 py-6 flex flex-col rounded-lg"
           >
@@ -150,7 +147,7 @@
             </form>
           </div>
 
-          <!-- request loan -->
+          <!-- OPERATION: LOAN -->
           <div
             class="bg-gradient-to-tl from-[#39b385] to-[#9be15d] px-8 py-6 flex flex-col rounded-lg"
           >
@@ -175,7 +172,7 @@
             </form>
           </div>
 
-          <!-- close account -->
+          <!-- OPERATION: CLOSE -->
           <div
             class="bg-gradient-to-tl from-[#e52a5a] to-[#ff585f] px-8 py-6 flex flex-col rounded-lg"
           >
@@ -216,6 +213,7 @@
     <footer
       class="w-full max-w-[1000px] mx-auto px-4 py-1 flex flex-wrap items-end justify-between text-xs"
     >
+      <!-- SUMMARY -->
       <div
         class="flex basis-[100%] xl:basis-[55%] items-center justify-between lg:gap-24 xl:gap-8 md:gap-8 gap-4 font-medium"
       >
@@ -239,6 +237,8 @@
         </div>
         <button class="text-sm font-normal uppercase">↓Sort</button>
       </div>
+
+      <!-- LOGOUT TIMER -->
       <p class="basis-[100%] mb-2 xl:mb-0 xl:basis-[45%] flex justify-end">
         You will be logged out in <span class="font-semibold ml-1"> 05:00</span>
       </p>

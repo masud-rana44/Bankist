@@ -186,18 +186,18 @@ const updateUI = function (acc) {
 
 const startLogOutTimer = function () {
   const tick = function () {
-    // const min = String(Math.trunc(time / 60)).padStart(2, 0);
-    // const sec = String(time % 60).padStart(2, 0);
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
 
     // In each call, print the remaining time to UI
-    // labelTimer.textContent = `${min}:${sec}`;
+    labelTimer.textContent = `${min}:${sec}`;
 
     // When 0 seconds, stop timer and log out user
-    // if (time === 0) {
-    //   clearInterval(timer);
-    //   labelWelcome.textContent = 'Log in to get started';
-    //   containerApp.style.opacity = 0;
-    // }
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
 
     // Decrease 1s
     time--;
