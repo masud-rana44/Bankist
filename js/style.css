@@ -206,6 +206,11 @@ nav {
   cursor: pointer;
 }
 
+.btn--sort.active {
+  font-weight: 600;
+  color: #333;
+}
+
 /* OPERATIONS */
 .operation {
   border-radius: 1rem;
