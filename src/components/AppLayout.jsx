@@ -3,7 +3,7 @@ import Nav from "./Nav";
 
 function AppLayout() {
   return (
-    <div className="font-poppins">
+    <div className="bg-[#f3f3f3] text-[#444] font-poppins">
       <Nav />
       <Outlet />
     </div>

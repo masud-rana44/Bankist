@@ -12,7 +12,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
 
   return (
-    <section className="bg-gray-50 h-[calc(100vh-64px)]">
+    <section className="h-[calc(100vh-64px)]">
       <div className="flex items-center justify-center h-full px-6 py-8 mx-auto lg:py-0">
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
