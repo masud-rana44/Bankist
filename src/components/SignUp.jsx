@@ -1,15 +1,38 @@
 import { VscGithub } from "react-icons/vsc";
 import { BsGoogle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import "../firebase.js";
 
 import Input from "./Input";
 import Button from "./Button";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext.jsx";
+
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
 
 function SignUp() {
+  const navigate = useNavigate();
+  const { dispatch } = useAuth();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSignupWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      dispatch({ type: "user/updated", payload: result.user });
+      navigate("/app");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSignupWithGitHub = (e) => {
+    e.preventDefault();
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=7fe89125847ce3ffd549&redirect_uri=http://localhost:5173/app`;
+  };
 
   return (
     <section className="h-[calc(100vh-64px)]">
@@ -50,11 +73,11 @@ function SignUp() {
                 Or continue with
               </p>
               <div className="flex items-center gap-4">
-                <Button>
+                <Button onClick={handleSignupWithGoogle}>
                   <BsGoogle />
                   <span>Google</span>
                 </Button>
-                <Button>
+                <Button onClick={handleSignupWithGitHub}>
                   <VscGithub />
                   <span>Github</span>
                 </Button>

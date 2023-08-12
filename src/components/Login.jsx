@@ -1,15 +1,36 @@
 import { VscGithub } from "react-icons/vsc";
 import { BsGoogle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithPopup, GoogleAuthProvider, getAuth } from "firebase/auth";
+
+import "../firebase.js";
 
 import Input from "./Input";
 import Button from "./Button";
 import { useState } from "react";
 import Checkbox from "./Checkbox";
+import { useAuth } from "../contexts/AuthContext.jsx";
+
+const auth = getAuth();
 
 function Login() {
+  const { dispatch } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  async function signInWithGoogle(e) {
+    e.preventDefault();
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      dispatch({ type: "user/updated", payload: result.user });
+      navigate("/app");
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <section className=" h-[calc(100vh-64px)]">
@@ -50,7 +71,7 @@ function Login() {
                 Or continue with
               </p>
               <div className="flex items-center gap-4">
-                <Button>
+                <Button onClick={signInWithGoogle}>
                   <BsGoogle />
                   <span>Google</span>
                 </Button>
